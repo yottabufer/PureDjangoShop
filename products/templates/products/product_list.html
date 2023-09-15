@@ -1,0 +1,42 @@
+{% extends 'static/templates/basic.html' %}
+
+{% block title %} All products {% endblock %}
+
+{% block content %}
+<div>
+    {% for one_product in products %}
+    <div>
+        <p>--------------------</p>
+        <a href='{{ one_product.get_absolute_url }}'>title -- {{ one_product.title }}</a>
+        <p>price -- {{ one_product.price }}</p>
+        <p>description -- {{ one_product.description }}</p>
+        <p>specifications -- {{ one_product.specifications }}</p>
+        <p>shop:
+            {% for product_in_shop in one_product.shop.all %}
+                {{ product_in_shop }}
+            {% endfor %}</p>
+        <p>quantity_product_in_shop -- {{ one_product.quantity_product_in_shop }}</p>
+
+    </div>
+    {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Первая </a>
+            <a href="?page={{ page_obj.previous_page_number }}"> Назад </a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> Вперёд </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}"> Последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+{% endblock %}

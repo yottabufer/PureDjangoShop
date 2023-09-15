@@ -1,0 +1,16 @@
+{% extends 'static/templates/basic.html' %}
+
+{% block title %} All products {% endblock %}
+
+{% block content %}
+<div>
+    <p>username -- {{ user.username }}</p>
+    <p>first_name -- {{ user.first_name }}</p>
+    <p>last_name -- {{ user.last_name }}</p>
+    <p>balance_user -- {{ user.balance_user }}</p>
+    <p>total_expenses -- {{ user.total_expenses }}</p>
+    <p>status -- {{ user.status }}</p>
+    <a href='{% url "update_profile" pk=user.pk %}'>Update</a>
+    <a href='{% url "order_history" pk=user.pk %}'>order_history</a>
+</div>
+{% endblock %}

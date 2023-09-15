@@ -1,0 +1,14 @@
+{% extends 'static/templates/basic.html' %}
+
+{% block title %} registration {% endblock %}
+
+{% block content %}
+<body>
+    <h1>register</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="register">
+    </form>
+</body>
+{% endblock %}

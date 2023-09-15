@@ -1,0 +1,21 @@
+{% extends 'static/templates/basic.html' %}
+
+{% block title %} Create new product {% endblock %}
+
+{% block content %}
+<div>
+    <h2>{{ product.title }}</h2>
+    <p>{{ product.price }}</p>
+    <p>{{ product.description }}</p>
+    <p>{{ product.specifications }}</p>
+    <p>{{ product.quantity_product_in_shop }}</p>
+</div>
+
+<form method="POST" action="/saveorder">
+    {% csrf_token %}
+    <p><input type="hidden" value='{{ request.user.pk }}' name="user_pk"/></p>
+    <p><input type="hidden" value='{{ product.pk }}' name="product_pk"/></p>
+    <p><input type="number" name="quantity_product"/></p>
+    <p><input type="submit" value='Create order' name='Create order'/></p>
+</form>
+{% endblock %}

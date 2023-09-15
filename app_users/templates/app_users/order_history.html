@@ -1,0 +1,16 @@
+{% extends 'static/templates/basic.html' %}
+{% load history_order_filter %}
+
+{% block title %} All products {% endblock %}
+
+{% block content %}
+<div>
+
+    {% history_order_filter as history %}
+
+    {% for key, value in history.items %}
+        <p>{{ key }} -- {{ value }}</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

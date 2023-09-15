@@ -1,0 +1,24 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type='text/css' href="{% static 'style.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %} Main Page {% endblock %} -- Product Shop</title>
+</head>
+<body>
+
+<nav>
+    <h1>Products</h1>
+    <a href='{% url "basket" %}'>basket</a>
+    <a href='{% url "all_product" %}'>All products</a>
+    <a href="{% url 'create_product' %}">Create new product</a>
+    <h1>User</h1>
+    <a href='{% url "registration" %}'>registration</a>
+    <a href='{{ user.get_absolute_url }}'>profile</a>
+    <a href='{% url "login" %}'>login</a>
+    <a href='{% url "logout" %}'>logout</a>
+</nav>
+<section>
+    {% block content %}
+    {% endblock %}
+</section>
+</body>

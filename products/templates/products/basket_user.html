@@ -1,0 +1,21 @@
+{% extends 'static/templates/basic.html' %}
+
+{% block title %} basket {% endblock %}
+
+{% block content %}
+
+<h2>Basket</h2>
+Balance user -- {{request.user.balance_user}}
+{% for product_in_basket in request.user.user_basket.part_basket.all %}
+    <p><a href='{{ product.get_absolute_url }}'> {{ product_in_basket }}</a> -- {{ product_in_basket.quantity_product }}</p>
+
+{% endfor %}
+
+<p>total cost of the basket -- {{ total_cost_basket }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <p><input type="submit" value='Payment order' name='Create order'/></p>
+</form>
+
+{% endblock %}
