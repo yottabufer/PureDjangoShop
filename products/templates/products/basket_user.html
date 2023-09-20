@@ -4,6 +4,11 @@
 
 {% block content %}
 
+
+{% if request.user.is_anonymous %}
+<h1>Зарегистрируйтесь, что бы иметь возможность добавлять товары в корзину</h1>
+{% endif %}
+
 <h2>Basket</h2>
 Balance user -- {{request.user.balance_user}}
 {% for product_in_basket in request.user.user_basket.part_basket.all %}

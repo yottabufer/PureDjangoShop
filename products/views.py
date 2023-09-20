@@ -63,16 +63,21 @@ class BasketView(ListView):
     template_name = 'products/basket_user.html'
     context_object_name = 'basket'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
     def total_cost_basket(self):
-        total_cost = 0
-        test = self.request.user.user_basket.part_basket.all()
-        for part in test:
-            total_cost += (part.product.price * part.quantity_product)
-        return int(total_cost)
+        if self.request.user.is_authenticated:
+            total_cost = 0
+            test = self.request.user.user_basket.part_basket.all()
+            for part in test:
+                total_cost += (part.product.price * part.quantity_product)
+            return int(total_cost)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['total_cost_basket'] = self.total_cost_basket()
+        if self.request.user.is_authenticated:
+            context['total_cost_basket'] = self.total_cost_basket()
         return context
 
     def post(self, request, *args, **kwargs):
