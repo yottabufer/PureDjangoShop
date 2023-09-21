@@ -11,10 +11,7 @@
         <p>price -- {{ one_product.price }}</p>
         <p>description -- {{ one_product.description }}</p>
         <p>specifications -- {{ one_product.specifications }}</p>
-        <p>shop:
-            {% for product_in_shop in one_product.shop.all %}
-                {{ product_in_shop }}
-            {% endfor %}</p>
+        <p>shop -- {{ one_product.shop }}
         <p>quantity_product_in_shop -- {{ one_product.quantity_product_in_shop }}</p>
 
     </div>

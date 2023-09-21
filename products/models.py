@@ -18,7 +18,7 @@ class ProductModel(models.Model):
     specifications = models.TextField(max_length=500, verbose_name='specifications')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='updated_at')
-    shop = models.ManyToManyField('ShopForProduct', verbose_name='shop', null=True)
+    shop = models.ForeignKey('ShopForProduct', on_delete=models.PROTECT, verbose_name='shop', null=True)
     quantity_product_in_shop = models.PositiveIntegerField(default=1, verbose_name='quantity products', null=True)
     objects = models.Manager()
 

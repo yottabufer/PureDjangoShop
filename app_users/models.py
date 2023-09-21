@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from products.models import ProductModel
 import logging
+from django.db.models import Sum, F
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +22,7 @@ class CustomUser(AbstractUser):
     total_expenses = models.IntegerField(default=0, editable=True, verbose_name='Total user expenses')
     status = models.CharField(max_length=255, choices=StatusUser.choices, default=StatusUser.bronze,
                               verbose_name='user status')
-    user_basket = models.ForeignKey('Basket', on_delete=models.CASCADE, verbose_name='basket', null=True)
+    # user_basket = models.ForeignKey('Basket', on_delete=models.CASCADE, verbose_name='basket', null=True)
     user_order_history = models.ForeignKey('UsersOrderHistory', on_delete=models.CASCADE, verbose_name='order history',
                                            null=True)
 
@@ -64,7 +65,13 @@ class PartBasket(models.Model):
 
 
 class Basket(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name='user')
     part_basket = models.ManyToManyField(PartBasket, verbose_name='product')
+    objects = models.Manager()
+
+    def get_total_cost(self):
+        queryset = PartBasket.objects.filter(basket=self.pk).aggregate(total_cost=Sum(F('product__price') * F('quantity_product')))["total_cost"]
+        return queryset
 
 
 class PartUsersOrderHistory(models.Model):
