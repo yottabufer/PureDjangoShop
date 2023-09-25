@@ -1,27 +1,23 @@
 {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
     <meta charset="UTF-8">
     <title>{% block title %} Main Page {% endblock %} -- Product Shop</title>
 </head>
 <body>
 
-<div class="container">TEST TEST</div>
-<div class="link-item">TEST TEST</div>
-
-
-<nav>
+<nav class="container">
     <h1>Products</h1>
     <a href='{% url "basket" %}' class="link-item">basket</a>
     <a href='{% url "all_product" %}' class="link-item">All products</a>
     {% if request.user.is_superuser %}
-    <a href="{% url 'create_product' %}">Create new product</a>
+    <a href="{% url 'create_product' %}" class="link-item">Create new product</a>
     {% endif %}
     <h1>User</h1>
-    <a href='{% url "registration" %}'>registration</a>
-    <a href='{{ user.get_absolute_url }}'>profile</a>
-    <a href='{% url "login" %}'>login</a>
-    <a href='{% url "logout" %}'>logout</a>
+    <a href='{% url "registration" %}' class="link-item" >registration</a>
+    <a href='{{ user.get_absolute_url }}' class="link-item">profile</a>
+    <a href='{% url "login" %}' class="link-item" >login</a>
+    <a href='{% url "logout" %}' class="link-item">logout</a>
 </nav>
 <section>
     {% block content %}

@@ -3,7 +3,7 @@
 {% block title %} Create new product {% endblock %}
 
 {% block content %}
-<div>
+<div class="container">
     <h2>title -- {{ product.title }}</h2>
     <p>price -- {{ product.price }}</p>
     <p>description -- {{ product.description }}</p>
@@ -12,9 +12,11 @@
     <p>quantity_product_in_shop -- {{ product.quantity_product_in_shop }}</p>
 </div>
 
-<form method="POST">
-    {% csrf_token %}
-    <p><input type="number" name="quantity_product"/></p>
-    <p><input type="submit" value='Create order' name='Create order'/></p>
-</form>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p><input type="number" name="quantity_product"/></p>
+        <p><input type="submit" value='Create order' name='Create order'/></p>
+    </form>
+</div>
 {% endblock %}

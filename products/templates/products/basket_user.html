@@ -4,12 +4,13 @@
 
 {% block content %}
 
+<div class="container">
+    {% if request.user.is_anonymous %}
+    <h1>Зарегистрируйтесь, что бы иметь возможность добавлять товары в корзину</h1>
+    {% endif %}
+</div>
 
-{% if request.user.is_anonymous %}
-<h1>Зарегистрируйтесь, что бы иметь возможность добавлять товары в корзину</h1>
-{% endif %}
-
-
+<div class="container">
 {% if request.user.is_authenticated and product_in_basket %}
 <h2>Basket</h2>
 Balance user -- {{request.user.balance_user}}
@@ -17,19 +18,14 @@ Balance user -- {{request.user.balance_user}}
         <p><a href='{{ product.get_absolute_url }}'> {{ product_in_basket }}</a> -- {{ product_in_basket.quantity_product }}</p>
     {% endfor %}
 
-<p>total cost of the basket -- {{ total_cost_basket }}</p>
-<form method="POST">
-    {% csrf_token %}
-    <p><input type="submit" value='Payment order' name='Create order'/></p>
-</form>
+    <p>total cost of the basket -- {{ total_cost_basket }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <p><input type="submit" value='Payment order' name='Create order'/></p>
+    </form>
 {% else %}
 <h1>В корзине пусто</h1>
 {% endif %}
-
-
-
-
-
+</div>
 
 {% endblock %}
-

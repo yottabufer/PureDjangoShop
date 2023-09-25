@@ -3,7 +3,7 @@
 {% block title %} All products {% endblock %}
 
 {% block content %}
-<div>
+<div class="container">
     {% for one_product in products %}
     <div>
         <p>--------------------</p>
@@ -20,17 +20,17 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; Первая </a>
-            <a href="?page={{ page_obj.previous_page_number }}"> Назад </a>
+            <a href="?page=1" class="link-item">&laquo;Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="link-item">Назад</a>
         {% endif %}
 
-        <span class="current">
+        <span class="current link-item">
             Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}"> Вперёд </a>
-            <a href="?page={{ page_obj.paginator.num_pages }}"> Последняя &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="link-item">Вперёд</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="link-item">Последняя&raquo;</a>
         {% endif %}
     </span>
 </div>

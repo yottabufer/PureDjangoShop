@@ -3,9 +3,13 @@
 {% block title %} Update profile balance {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type='submit' value='Update'>Update</button>
-</form>
+<div class="container">
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit' value='Update'>Update</button>
+    </form>
+</div>
+
 {% endblock %}
