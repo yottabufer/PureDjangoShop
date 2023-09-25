@@ -52,7 +52,18 @@ class CustomUser(AbstractUser):
         return self.status
 
 
+class Basket(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name='user')
+    objects = models.Manager()
+
+    def get_total_cost(self):
+        queryset = PartBasket.objects.filter(basket=self.pk).aggregate(
+            total_cost=Sum(F('product__price') * F('quantity_product')))["total_cost"]
+        return queryset
+
+
 class PartBasket(models.Model):
+    basket = models.ForeignKey(Basket, verbose_name='basket', on_delete=models.CASCADE, related_name='basket')
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, verbose_name='product', null=True)
     quantity_product = models.PositiveIntegerField(default=1, verbose_name='quantity products', null=True)
     objects = models.Manager()
@@ -62,16 +73,6 @@ class PartBasket(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail_product', kwargs={'pk': self.product.pk})
-
-
-class Basket(models.Model):
-    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name='user')
-    part_basket = models.ManyToManyField(PartBasket, verbose_name='product')
-    objects = models.Manager()
-
-    def get_total_cost(self):
-        queryset = PartBasket.objects.filter(basket=self.pk).aggregate(total_cost=Sum(F('product__price') * F('quantity_product')))["total_cost"]
-        return queryset
 
 
 class PartUsersOrderHistory(models.Model):

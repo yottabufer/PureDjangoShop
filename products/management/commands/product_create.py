@@ -9,7 +9,7 @@ from django.utils.crypto import get_random_string
 class Command(BaseCommand, ABC):
     def handle(self, *args, **options):
         self.stdout.write('Создание товара')
-        for _ in range(250):
+        for _ in range(20):
             product, created = ProductModel.objects.get_or_create(
                 title=get_random_string(10),
                 description=get_random_string(10),

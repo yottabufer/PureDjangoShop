@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 import debug_toolbar
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('user/', include('app_users.urls')),
-    # path('basket/', include('basket.urls')),
-    path('', include('products.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
 
-]
+urlpatterns = [
+                  path('admin/', admin.site.urls),
+                  path('user/', include('app_users.urls')),
+                  path('', include('products.urls')),
+                  path('__debug__/', include('debug_toolbar.urls')),
+
+              ]
