@@ -1,8 +1,17 @@
 {% extends 'static/templates/basic.html' %}
+{% load static %}
 
 {% block title %} basket {% endblock %}
 
 {% block content %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+
+</head>
+
 
 <div class="container">
     {% if request.user.is_anonymous %}
@@ -11,7 +20,7 @@
 </div>
 
 <div class="container">
-{% if request.user.is_authenticated and product_in_basket %}
+{% if request.user.is_authenticated %}
 <h2>Basket</h2>
 Balance user -- {{request.user.balance_user}}
     {% for product_in_basket in part_basket %}
@@ -20,12 +29,13 @@ Balance user -- {{request.user.balance_user}}
 
     <p>total cost of the basket -- {{ total_cost_basket }}</p>
     <form method="POST">
+        <script src="{% static 'js/message_basket.js' %}"></script>
         {% csrf_token %}
-        <p><input type="submit" value='Payment order' name='Create order'/></p>
+        <p><input type="submit" value='Payment order' name='Create order' id="pay-button"/></p>
     </form>
+
 {% else %}
 <h1>В корзине пусто</h1>
 {% endif %}
-</div>
 
 {% endblock %}

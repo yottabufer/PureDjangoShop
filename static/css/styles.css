@@ -3,7 +3,40 @@
 }
 
 .container {
-    width: 80%; /* Пример: задайте фиксированную ширину */
-    margin: 0 auto; /* Устанавливает автоматические отступы слева и справа, чтобы центрировать контейнер */
-    text-align: center; /* Если вы хотите центрировать текст внутри контейнера */
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.message {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message-box {
+display: none;
+position: fixed;
+bottom: 20px;
+right: 20px;
+background-color: rgba(50, 50, 50, 0.8);
+color: white;
+padding: 10px;
+border-radius: 5px;
+animation-duration: 3s;
+}
+
+.message-box.show {
+display: block;
+animation-name: slide-in;
+}
+
+@keyframes slide-in {
+from { right: -200px; }
+to { right: 20px; }
 }

@@ -1,3 +1,5 @@
+import time
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as _
@@ -35,7 +37,7 @@ class DetailProduct(DetailView):
                 basket=basket)
             part_basket.save()
 
-            return redirect('all_product')
+            return redirect('basket')
         else:
             return redirect('registration')
 
@@ -70,6 +72,7 @@ class BasketView(ListView):
         basket_instance, created = Basket.objects.get_or_create(user=self.request.user)
         if request.user.balance_user < basket_instance.get_total_cost():
             logger.debug(f"{request.user.id} -- Мало денег -- {request.user.balance_user} < {basket_instance.get_total_cost()}")
+            time.sleep(3)
             return redirect('basket')
         else:
             part_order_history = PartUsersOrderHistory()
