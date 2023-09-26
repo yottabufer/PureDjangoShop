@@ -1,7 +1,6 @@
 ## О данном проекте 
 * Back-end для магазина чего-угодно на чистом Django
 * Есть ещё недочёты, но решил уже открыть репозиторий
-* 
 
 ### Запуск
 1. Клонируем проект с репозитория
@@ -47,7 +46,7 @@ python manage.py shop_create
 ```python
 python manage.py product_create
 ```
-8Запускаем
+8. Pапускаем
 ```python
 python manage.py runserver
 ```
