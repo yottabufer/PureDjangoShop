@@ -46,7 +46,7 @@ python manage.py shop_create
 ```python
 python manage.py product_create
 ```
-8. Pапускаем
+8. Запускаем
 ```python
 python manage.py runserver
 ```
