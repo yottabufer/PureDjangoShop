@@ -24,7 +24,7 @@
 <h2>Basket</h2>
 Balance user -- {{request.user.balance_user}}
     {% for product_in_basket in part_basket %}
-        <p><a href='{{ product.get_absolute_url }}'> {{ product_in_basket }}</a> -- {{ product_in_basket.quantity_product }}</p>
+        <p><a href='{{ product_in_basket.get_absolute_url }}'> {{ product_in_basket }}</a> -- {{ product_in_basket.quantity_product }}</p>
     {% endfor %}
 
     <p>total cost of the basket -- {{ total_cost_basket }}</p>

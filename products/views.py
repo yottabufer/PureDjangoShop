@@ -29,14 +29,16 @@ class DetailProduct(DetailView):
     template_name = 'products/detail_product.html'
 
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and \
+                (int(request.POST.get('quantity_product')) < int(self.get_object().quantity_product_in_shop)):
+            print(int(request.POST.get('quantity_product')))
+            print(int(self.get_object().quantity_product_in_shop))
             basket, created = Basket.objects.get_or_create(user=self.request.user)
             part_basket, created = PartBasket.objects.get_or_create(
                 product=self.get_object(),
                 quantity_product=request.POST.get('quantity_product'),
                 basket=basket)
             part_basket.save()
-
             return redirect('basket')
         else:
             return redirect('registration')
